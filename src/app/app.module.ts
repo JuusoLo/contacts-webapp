@@ -6,16 +6,26 @@ import {FormsModule} from '@angular/forms';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import {ContactService} from './contact/Services/contact.service';
 import {HttpClientModule} from '@angular/common/http';
+import { ContactDetailComponent } from './contact/contact-detail/contact-detail.component';
+import {RouterModule, Routes} from '@angular/router';
 
+
+const appRoutes: Routes = [
+  {path: 'contacts', component: ContactListComponent},
+  {path: 'contacts/:id', component: ContactDetailComponent},
+  {path: '', redirectTo: '/contacts', pathMatch: 'full'}
+];
 @NgModule({
   declarations: [
     AppComponent,
-    ContactListComponent
+    ContactListComponent,
+    ContactDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     ContactService

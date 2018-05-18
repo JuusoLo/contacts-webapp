@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     MaterialComponentsModule,
-    FlexLayoutModule
+    //FlexLayoutModule
   ],
   providers: [
     ContactService

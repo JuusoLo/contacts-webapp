@@ -8,6 +8,7 @@ import {ContactService} from './contact/Services/contact.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ContactDetailComponent } from './contact/contact-detail/contact-detail.component';
 import {RouterModule, Routes} from '@angular/router';
+import {MaterialComponentsModule} from './UI/material-components/material-components.module';
 
 
 const appRoutes: Routes = [
@@ -26,6 +27,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    MaterialComponentsModule,
+    FlexLayoutModule
   ],
   providers: [
     ContactService

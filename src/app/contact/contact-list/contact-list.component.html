@@ -1,4 +1,4 @@
-<mat-list>
+<mat-nav-list>
   <mat-list-item *ngFor="let contact of contacts | orderBy: 'firstName'" (click)="onContactSelect(contact)">
     <avatar matListIcon class="cw-contact-list-item-avatar"
             [name]="contact.firstName +' '+ contact.lastName"
@@ -9,7 +9,11 @@
 
     </avatar>
     <h4 matLine>{{contact.firstName+' '+ contact.lastName }}</h4>
-    <h4 matLine>{{contact.phoneNumber}}</h4>
+    <p matLine>{{contact.phoneNumber}}</p>
 
 </mat-list-item>
-</mat-list>
+</mat-nav-list>
+
+<button mat-fab (click)="onCreateNew()" class="cw-fab" color="accent">
+  <mat-icon>add</mat-icon>
+</button>

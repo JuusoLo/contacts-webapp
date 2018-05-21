@@ -12,11 +12,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AvatarModule} from 'ng2-avatar';
 import { TextToColorPipe } from './contact/pipes/text-to-color.pipe';
 import {NgPipesModule} from 'ngx-pipes';
+import {MatInputModule} from '@angular/material';
 
 
 
 const appRoutes: Routes = [
   {path: 'contacts', component: ContactListComponent},
+  {path: 'contacts/new', component: ContactDetailComponent},
   {path: 'contacts/:id', component: ContactDetailComponent},
   {path: '', redirectTo: '/contacts', pathMatch: 'full'}
 ];
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     MaterialComponentsModule,
     FlexLayoutModule,
     AvatarModule.forRoot(),
-    NgPipesModule
+    NgPipesModule,
+
   ],
   providers: [
     ContactService

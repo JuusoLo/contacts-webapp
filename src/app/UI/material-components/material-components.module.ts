@@ -1,8 +1,7 @@
 import {
-  MatButtonModule,
+  MatButtonModule, MatCardModule,
   MatDividerModule,
-  MatIcon,
-  MatIconModule,
+  MatIconModule, MatInputModule,
   MatListModule,
   MatSidenavModule,
   MatToolbarModule
@@ -20,7 +19,9 @@ const materialModules = [
   MatToolbarModule,
   MatIconModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
+  MatCardModule,
+  MatInputModule
 ];
 
 @NgModule({

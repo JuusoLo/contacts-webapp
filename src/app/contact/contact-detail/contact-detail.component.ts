@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ContactService} from '../Services/contact.service';
 import {Contact} from '../contact';
+import {ToolbarOptions} from '../../UI/toolbar-options';
 
 // import {error} from 'selenium-webdriver';
 
@@ -18,8 +19,11 @@ export class ContactDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.toolbar.toolbarOptions.next(
+      new ToolbarOptions('Contact', [toolbarAction(this.onEdit)]
+      ));
     const contactId = this.route.snapshot.paramMap.get('id');
-    console.log(contactId);
+
     if (contactId == null) {
       return;
     }

@@ -6,10 +6,11 @@ import {ToolbarOptions} from './toolbar-options';
   providedIn: 'root'
 })
 export class ToolbarService {
+
   toolbarOptions: BehaviorSubject<ToolbarOptions>;
 
   constructor() {
     this.toolbarOptions = new BehaviorSubject<ToolbarOptions>(
-      new ToolbarOptions('Contacts application', []));
+      new ToolbarOptions('Contacts Application', []));
   }
 }

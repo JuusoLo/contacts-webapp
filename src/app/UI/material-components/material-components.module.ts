@@ -1,18 +1,17 @@
+import {NgModule} from '@angular/core';
 import {
-  MatButtonModule, MatCardModule,
+  MatButtonModule,
+  MatCardModule,
   MatDividerModule,
-  MatIconModule, MatInputModule,
-  MatListModule,
+  MatIconModule,
+  MatInputModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
-
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatListModule} from '@angular/material/list';
 
 const materialModules = [
-  CommonModule,
   MatButtonModule,
   MatSidenavModule,
   BrowserAnimationsModule,
@@ -32,4 +31,5 @@ const materialModules = [
     materialModules
   ]
 })
-export class MaterialComponentsModule { }
+export class MaterialComponentsModule {
+}

@@ -7,22 +7,25 @@ import {ToolbarOptions} from '../toolbar-options';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
+
 export class ToolbarComponent implements OnInit {
 
-  @Output() onMenuClick: EventEmitter<any>;
+  @Output() MenuClick: EventEmitter<any>;
   options: ToolbarOptions;
 
-  constructor(private  toolbar: ToolbarService) {
-    this.onMenuClick = new EventEmitter<any>();
+  constructor(private toolbar: ToolbarService) {
+    this.MenuClick = new EventEmitter<any>();
   }
 
   ngOnInit() {
-    this.toolbar.toolbarOptions.subscribe((options: ToolbarOptions) =>
-      this.options = options);
+    this.toolbar.toolbarOptions.subscribe((options: ToolbarOptions) => {
+      this.options = options;
+    });
   }
 
-  menuClick() {
-    this.onMenuClick.emit();
+  onMenuClick() {
+    this.MenuClick.emit();
   }
 
 }
+

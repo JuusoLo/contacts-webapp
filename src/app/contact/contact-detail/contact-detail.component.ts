@@ -14,26 +14,26 @@ import {ToolbarAction} from '../../UI/toolbar-action';
 export class ContactDetailComponent implements OnInit {
   editingEnabled: boolean;
   contact: Contact;
+  contactId: any;
 
   constructor(private router: Router, private route: ActivatedRoute,
               private contactService: ContactService, private toolbar: ToolbarService) {
     this.contact = new Contact();
-    this.editingEnabled = false;
   }
 
   ngOnInit() {
 
-    const contactId = this.route.snapshot.paramMap.get('id');
+    this.contactId = this.route.snapshot.paramMap.get('id');
       let toolbarActions: ToolbarAction[];
 
-    if (contactId == null) {
+    if (this.contactId == null) {
       // Create contact
       this.editingEnabled = true;
         toolbarActions = [];
     } else {
       // View/Edit contact
       toolbarActions = [new ToolbarAction(this.onEdit.bind(this), 'edit')];
-      this.contactService.getContactById(contactId).subscribe(response => {
+      this.contactService.getContactById(this.contactId).subscribe(response => {
         this.contact = response;
         console.log(this.contact);
       }, error => {
@@ -42,10 +42,6 @@ export class ContactDetailComponent implements OnInit {
         this.router.navigate(['/contacts']);
       });
     }
-    this.toolbar.toolbarOptions.next(
-      new ToolbarOptions('Contact', toolbarActions));
-
-
   }
 
   onNavigateBack(): void {
@@ -53,7 +49,22 @@ export class ContactDetailComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log('TODO: Save');
+    if (this.contactId == null) {
+      // Create contact
+      this.contactService.createContact(this.contact).subscribe(response => {
+        this.contact = response;
+        console.log('Created contact');
+        console.log(this.contact);
+        const toolbarActions: ToolbarAction[] = [new ToolbarAction(this.onEdit.bind(this),
+          'edit')]; this.toolbar.toolbarOptions.next(
+          new ToolbarOptions('Contact', toolbarActions));
+      });
+    } else {
+      this.editingEnabled = false;
+      this.contactService.updateContact(this.contact).subscribe(response=> {
+        console.log(response);
+      });
+    }
   }
 
   onEdit() {

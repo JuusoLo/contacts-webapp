@@ -19,9 +19,13 @@ export class ContactDetailComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,
               private contactService: ContactService, private toolbar: ToolbarService) {
     this.contact = new Contact();
+    this.editingEnabled = false;
   }
 
   ngOnInit() {
+    this.toolbar.toolbarOptions.next(
+      new ToolbarOptions (true, 'Contact', [new ToolbarAction(this.onEdit.bind(this), 'edit')])
+    );
 
     this.contactId = this.route.snapshot.paramMap.get('id');
       let toolbarActions: ToolbarAction[];
@@ -32,6 +36,7 @@ export class ContactDetailComponent implements OnInit {
         toolbarActions = [];
     } else {
       // View/Edit contact
+      this.editingEnabled = false;
       toolbarActions = [new ToolbarAction(this.onEdit.bind(this), 'edit')];
       this.contactService.getContactById(this.contactId).subscribe(response => {
         this.contact = response;
@@ -42,6 +47,9 @@ export class ContactDetailComponent implements OnInit {
         this.router.navigate(['/contacts']);
       });
     }
+    this.toolbar.toolbarOptions.next(
+      new ToolbarOptions(
+         true, 'Contact', toolbarActions));
   }
 
   onNavigateBack(): void {
@@ -52,23 +60,24 @@ export class ContactDetailComponent implements OnInit {
     if (this.contactId == null) {
       // Create contact
       this.contactService.createContact(this.contact).subscribe(response => {
-        this.contact = response;
-        console.log('Created contact');
-        console.log(this.contact);
-        const toolbarActions: ToolbarAction[] = [new ToolbarAction(this.onEdit.bind(this),
-          'edit')]; this.toolbar.toolbarOptions.next(
-          new ToolbarOptions('Contact', toolbarActions));
+        console.log(response);
+        this.router.navigate(['/contacts']);
       });
     } else {
       this.editingEnabled = false;
-      this.contactService.updateContact(this.contact).subscribe(response=> {
+      this.contactService.updateContact(this.contact).subscribe(response => {
         console.log(response);
       });
     }
   }
 
   onEdit() {
-    console.log('TODO: activate/deactivate edit mode');
     this.editingEnabled = !this.editingEnabled;
+  }
+  onDelete() {
+    this.editingEnabled = true;
+    this.contactService.deleteContact(this.contact).subscribe(() => {
+      this.router.navigate(['/contacts']);
+    });
   }
 }

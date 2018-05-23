@@ -3,7 +3,8 @@
 
   <mat-card-actions align="end">
     <!-- Delete button -->
-    <button mat-icon-button (click)="onDelete()" *ngIf="editingEnabled">
+    <button mat-icon-button (click)="onDelete()"color="primary"
+            *ngIf="editingEnabled && contactId">
       <mat-icon>delete_forever</mat-icon>
     </button>
   </mat-card-actions>

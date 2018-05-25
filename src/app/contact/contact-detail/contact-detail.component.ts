@@ -50,12 +50,12 @@ export class ContactDetailComponent implements OnInit {
     this.toolbar.toolbarOptions.next(
       new ToolbarOptions(
          true, 'Contact', toolbarActions));
+    this.toolbar.setToolbarOptions(new ToolbarOptions(true, 'Contact', toolbarActions));
   }
 
   onNavigateBack(): void {
     this.router.navigate(['/contacts']);
   }
-
   onSave(): void {
     if (this.contactId == null) {
       // Create contact
@@ -72,7 +72,21 @@ export class ContactDetailComponent implements OnInit {
   }
 
   onEdit() {
+    let toolbarActions: ToolbarAction[];
     this.editingEnabled = !this.editingEnabled;
+    if (this.editingEnabled === true) {
+      // Edit mode on
+      toolbarActions = [
+        new ToolbarAction(this.onDelete.bind(this), 'delete_sweep'),
+        new ToolbarAction(this.onEdit.bind(this), 'edit')
+      ];
+    } else {
+      // Edit mode of
+      toolbarActions = [
+        new ToolbarAction(this.onEdit.bind(this), 'edit')
+      ];
+    }
+    this.toolbar.setToolbarOptions(new ToolbarOptions(true, 'Contact', toolbarActions));
   }
   onDelete() {
     this.editingEnabled = true;

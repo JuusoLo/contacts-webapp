@@ -1,21 +1,28 @@
+
+<script src="ui/toolbar/toolbar.service.ts"></script>
 <mat-sidenav-container class="cw-sidenav-container">
   <mat-sidenav #sidenav align="start" [mode]="'over'" [opened]="false" class="cw-sidenav">
-<!-- Sidenav content -->
+    <!-- Sidenav content -->
     <div>
-      <div fxLayout="column" fxLayoutalign="center center" class="cw-sidenav-user-area">
+      <div fxLayout="column" fxLayoutAlign="center center" class="cw-sidenav-user-area">
         <div>
-          <mat-icon class="cw-sidenav-avatar" color="primary">person</mat-icon>
+          <mat-icon class="cw-sidenav-avatar" color="primary">account_circle</mat-icon>
         </div>
         <div>
-          <span class="cw-sidenav-text">Ekoodi Summer school</span>
+          <span>Juuso Lonka &</span>
           <br>
-          <span>Juuso Lonka</span>
-          <br>
-          <span>Olli Jokinen</span>
+          <span>Ruijanpallas </span>
+        </div>
       </div>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-nav-list>
+          <mat-list-item>
+            <a routerLink="login">Sign out</a>
+          </mat-list-item>
+        </mat-nav-list>
       </div>
     </div>
-    <span>Sidenav content</span>
   </mat-sidenav>
 
   <div fxFlexFill class="cw-sidenav-content">

@@ -4,7 +4,7 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  apiEndpointUrl: 'https://ekoodicontactsapi.azurewebsites.net'
+  apiEndpointUrl: 'http://contactswebapijlo.azurewebsites.net'
 };
 
 /*

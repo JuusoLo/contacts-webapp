@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Contact} from '../contact';
-import {ContactService} from '../Services/contact.service';
+import {ContactService} from '../services/contact.service';
 import {Router} from '@angular/router';
 import {ToolbarOptions} from '../../UI/toolbar-options';
 import {ToolbarService} from '../../UI/toolbar.service';

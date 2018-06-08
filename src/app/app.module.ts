@@ -14,11 +14,11 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AvatarModule} from 'ng2-avatar';
 import {TextToColorPipe} from './contact/pipes/text-to-color.pipe';
 import {NgPipesModule} from 'ngx-pipes';
-import { ToolbarComponent } from './ui/toolbar/toolbar.component';
 import {ToolbarService} from './UI/toolbar.service';
 import { LoginComponent } from './user/login/login.component';
 import {AuthenticationService} from './user/services/authentication.service';
 import {TokenService} from './user/services/token.service';
+import {ToolbarComponent} from './UI/toolbar/toolbar.component';
 
 const appRoutes: Routes = [
   {path: 'contacts', component: ContactListComponent},

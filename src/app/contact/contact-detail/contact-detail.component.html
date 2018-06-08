@@ -5,7 +5,6 @@
     <!-- Delete button -->
     <button mat-icon-button (click)="onDelete()"color="primary"
             *ngIf="editingEnabled && contactId">
-      <mat-icon>grade_outlined</mat-icon>
     </button>
   </mat-card-actions>
 
@@ -66,4 +65,6 @@
 <button *ngIf="editingEnabled" mat-fab (click)="onSave()" class="cw-fab">
   <mat-icon>check</mat-icon>
 </button>
+
+
 

@@ -19,6 +19,10 @@ import { LoginComponent } from './user/login/login.component';
 import {AuthenticationService} from './user/services/authentication.service';
 import {TokenService} from './user/services/token.service';
 import {ToolbarComponent} from './UI/toolbar/toolbar.component';
+import {MatDialogModule, MatSnackBarModule} from '@angular/material';
+import { ErrorDialogComponent } from './UI/error-dialog/error-dialog.component';
+import {DialogService} from './UI/services/dialog.service';
+
 
 const appRoutes: Routes = [
   {path: 'contacts', component: ContactListComponent},
@@ -35,7 +39,9 @@ const appRoutes: Routes = [
     ContactDetailComponent,
     TextToColorPipe,
     ToolbarComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorDialogComponent
+
   ],
   imports: [
     BrowserModule,
@@ -45,15 +51,23 @@ const appRoutes: Routes = [
     MaterialComponentsModule,
     FlexLayoutModule,
     AvatarModule.forRoot(),
-    NgPipesModule
+    NgPipesModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [
     ContactService,
     ContactHttpService,
     ToolbarService,
     AuthenticationService,
-    TokenService
+    TokenService,
+    DialogService
+
   ],
+  entryComponents: [
+    ErrorDialogComponent
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

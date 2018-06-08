@@ -5,6 +5,7 @@ import {Contact} from '../contact';
 import {ToolbarOptions} from '../../UI/toolbar-options';
 import {ToolbarService} from '../../UI/toolbar.service';
 import {ToolbarAction} from '../../UI/toolbar-action';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-contact-detail',
@@ -17,7 +18,7 @@ export class ContactDetailComponent implements OnInit {
   contactId: any;
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private contactService: ContactService, private toolbar: ToolbarService) {
+              private contactService: ContactService, private toolbar: ToolbarService, public snackBar: MatSnackBar) {
     this.contact = new Contact();
     this.editingEnabled = false;
   }
@@ -56,25 +57,35 @@ export class ContactDetailComponent implements OnInit {
   onNavigateBack(): void {
     this.router.navigate(['/contacts']);
   }
-  onSave(): void {
+  onSave(message: string, action: string): void {
     if (this.contactId == null) {
       // Create contact
       this.contactService.createContact(this.contact).subscribe(response => {
         console.log(response);
         this.router.navigate(['/contacts']);
+        this.snackBar.open('Contact created', 'Close', {
+          duration: 3000
+        });
       });
     } else {
       this.editingEnabled = false;
       this.contactService.updateContact(this.contact).subscribe(response => {
         console.log(response);
+        this.snackBar.open('Changes saved', 'Close', {
+          duration: 3000
+        });
       });
     }
   }
+
 
   onEdit() {
     let toolbarActions: ToolbarAction[];
     this.editingEnabled = !this.editingEnabled;
     if (this.editingEnabled === true) {
+      this.snackBar.open('Editing enabled', 'Close', {
+        duration: 1500
+      });
       // Edit mode on
       toolbarActions = [
         new ToolbarAction(this.onDelete.bind(this), 'delete_sweep'),
@@ -85,13 +96,21 @@ export class ContactDetailComponent implements OnInit {
       toolbarActions = [
         new ToolbarAction(this.onEdit.bind(this), 'edit')
       ];
+      this.snackBar.open('Editing disabled', 'Close', {
+        duration: 1500
+      });
     }
+
     this.toolbar.setToolbarOptions(new ToolbarOptions(true, 'Contact', toolbarActions));
+
   }
   onDelete() {
     this.editingEnabled = true;
     this.contactService.deleteContact(this.contact).subscribe(() => {
       this.router.navigate(['/contacts']);
+      this.snackBar.open('Contact deleted', 'Close', {
+        duration: 3000
+      });
     });
   }
 }
